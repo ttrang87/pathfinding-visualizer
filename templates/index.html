@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask Test</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>Flask is working!</h1>
-    <p>Welcome to your simple Flask web app.</p>
+    <header>
+        <div class="firstpart">
+            <p id="logo">Path Finding Visualizer</p>
+            <label id="animate">
+                <input type="checkbox" id="AnimateCheckbox" />
+                Visualize Maze Generation
+            </label>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Algorithms</button>
+            <div class="options">
+                <button>Depth-first Search</button>
+                <button>Breadth-first Search</button>
+                <button>Dijkstra's Algorithm</button>
+                <button>A* Search</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Mazes</button>
+            <div class="options">
+                <button id="KruskalMazeButton">Kruskal Maze</button>
+                <button id="verticalMazeButton">Vertical Maze</button>
+                <button>Horizontal Maze</button>
+                <button>Random Obstacle</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Clear</button>
+            <div class="options">
+                <button>Clear Path</button>
+                <button id="clearBoardButton">Clear Board</button>
+            </div>
+        </div>
+        <button class ="dropbtn">Run</button>
+        <div class="dropdown">
+            <button class="dropbtn">Setting</button>
+        </div>
+    </header>
+    <main>
+        <div class="grid-container" id="grid"></div>
+    </main>
+    <script src="../static/scripts/CellPosition.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../static/scripts/RecursiveMaze.js"></script>
+    <script src="../static/scripts/Clear.js"></script>
 </body>
 </html>
