@@ -10,7 +10,7 @@ document.getElementById('KruskalMazeButton').addEventListener('click', async () 
     };
 
     try {
-        const response = await axios.post('/generate_maze', data);
+        const response = await axios.post('/maze/kruskal', data);
         const { maze, steps } = response.data;
 
         if (animate) {
