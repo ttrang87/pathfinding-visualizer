@@ -27,8 +27,8 @@ document.getElementById('KruskalMazeButton').addEventListener('click', async () 
 function renderMaze(maze, rows, cols) {
     gridContainer.innerHTML = '';
 
-    gridContainer.style.gridTemplateColumns = `repeat(${cols}, 30px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${rows}, 30px)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
 
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
@@ -37,8 +37,8 @@ function renderMaze(maze, rows, cols) {
             cell.dataset.row = r;
             cell.dataset.col = c;
 
-            const key = `${r},${c}`;
-            if (maze[key] === 1) {
+
+            if (maze[r][c] === 1) {
                 cell.classList.add('maze-cell');
             }
 
@@ -76,8 +76,8 @@ function renderMaze(maze, rows, cols) {
 
 function animateMaze(steps, rows, cols) {
     gridContainer.innerHTML = '';
-    gridContainer.style.gridTemplateColumns = `repeat(${cols}, 30px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${rows}, 30px)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
 
     const cells = [];
     for (let r = 0; r < rows; r++) {
@@ -120,10 +120,9 @@ function animateMaze(steps, rows, cols) {
         cells.forEach((cell) => {
             const r = parseInt(cell.dataset.row);
             const c = parseInt(cell.dataset.col);
-            const key = `${r},${c}`;
 
             cell.className = 'grid-cell'; // Reset class
-            if (maze[key] === 1) {
+            if (maze[r][c] === 1) {
                 cell.classList.add('maze-cell');
             }
 
@@ -136,7 +135,7 @@ function animateMaze(steps, rows, cols) {
 
         currentStep++;
         if (currentStep < steps.length) {
-            setTimeout(drawStep, 30); 
+            setTimeout(drawStep, 40); 
         }
     }
 
