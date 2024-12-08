@@ -18,7 +18,7 @@
         <div class="dropdown">
             <button class="dropbtn">Algorithms</button>
             <div class="options">
-                <button>Depth-first Search</button>
+                <button id="DFSButton">Depth-first Search</button>
                 <button>Breadth-first Search</button>
                 <button>Dijkstra's Algorithm</button>
                 <button>A* Search</button>
@@ -48,10 +48,14 @@
     <main>
         <div class="grid-container" id="grid"></div>
     </main>
-    <script src="../static/scripts/CellPosition.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../static/scripts/RecursiveMaze.js"></script>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <script src="../static/scripts/InitialGrid.js"></script>
+    <script src="../static/scripts/terrain/KruskalMaze.js"></script>
     <script src="../static/scripts/Clear.js"></script>
-    <script src="../static/scripts/RandomObstacle.js"></script>
+    <script src="../static/scripts/terrain/RandomObstacle.js"></script>
+    <script type="module" src="../static/scripts/path_find/DFS.js"></script>
+
+
 </body>
 </html>

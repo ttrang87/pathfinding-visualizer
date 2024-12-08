@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from maze_generation.kruskalmaze import MazeGenerator
 
-generate_maze_blueprint = Blueprint('generate_kruskal', __name__) #not affect the URL or functionality, just name.
+generate_maze_blueprint = Blueprint('generate_kruskal', __name__)
 
 @generate_maze_blueprint.route('/kruskal', methods=['POST'])
 def generate_maze():
@@ -21,30 +21,35 @@ def generate_maze():
         maze = maze_generator.generate_maze()
         frames = []
         for frame in maze_generator.frames:
-            frame_dict = {}
+            frame_array = []
             for r in range(rows):
+                row = []
                 for c in range(cols):
-                    frame_dict[f"{r},{c}"] = int(frame[r][c])
-            frames.append(frame_dict)
+                    row.append(int(frame[r][c]))
+                frame_array.append(row)
+            frames.append(frame_array)
         
-        maze_dict = {}
+        maze_array = []
         for r in range(rows):
+            row = []
             for c in range(cols):
-                maze_dict[f"{r},{c}"] = int(maze[r][c])
+                row.append(int(maze[r][c]))
+            maze_array.append(row)
 
         return jsonify({
-            "maze": maze_dict,
+            "maze": maze_array,
             "steps": frames
         })
 
     maze = maze_generator.generate_maze()
 
-    # Convert the maze to a dictionary with (row,col) keys
-    maze_dict = {}
+    maze_array = []
     for r in range(rows):
+        row = []
         for c in range(cols):
-            maze_dict[f"{r},{c}"] = int(maze[r][c])
+            row.append(int(maze[r][c]))
+        maze_array.append(row)
 
     return jsonify({
-        "maze": maze_dict,
+        "maze": maze_array,
     })

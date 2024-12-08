@@ -1,6 +1,6 @@
 document.getElementById('clearBoardButton').addEventListener('click', async () => {
-    startCell = { row: 5, col: 10 }; // Default start cell
-    endCell = { row: 9, col: 27 }; // Default end cell
+    startCell = { row: 3, col: 4 };
+    endCell = { row: 10, col: 27 };
     createGrid();
 
 })

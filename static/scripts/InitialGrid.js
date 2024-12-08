@@ -1,10 +1,10 @@
 const gridContainer = document.getElementById("grid");
-const cellSize = 30;
+const cellSize = 40;
 
-const defaultcols = 41;
-const defaultrows = 17;
+const defaultcols = 31;
+const defaultrows = 13;
 
-let startCell = { row: 2, col: 6 }; 
+let startCell = { row: 3, col: 4 }; 
 let endCell = { row: 10, col: 27 }; 
 
 let isDraggingStart = false;
