@@ -48,7 +48,6 @@ function renderPath(path) {
         const cell = document.querySelector(`[data-row="${x}"][data-col="${y}"]`);
         if (cell) {
             cell.classList.add('path');
-            cell.style.backgroundColor = 'yellow';
         }
     })
 
