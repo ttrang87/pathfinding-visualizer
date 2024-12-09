@@ -94,11 +94,15 @@ header {
 }
 
 .start-cell {
-    background-color: #7FFF00;
+    background-color: #16F529;
 }
 
 .end-cell {
     background-color: #FF0800; 
+}
+
+.path {
+    background-color: yellow !important;;
 }
 
 
