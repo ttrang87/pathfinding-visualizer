@@ -2,7 +2,7 @@ import { statusCell } from "../StatusCell.js"
 import {renderPath, resetCellColors, animateVisitedCells} from "./CellsColor.js"
 
 
-document.getElementById('BFSButton').addEventListener('click', async () => {
+document.getElementById('AstarButton').addEventListener('click', async () => {
     resetCellColors();
     const maze = statusCell()
 
@@ -15,7 +15,7 @@ document.getElementById('BFSButton').addEventListener('click', async () => {
     };
 
     try {
-        const response = await axios.post('/pathfinding/bfs', data);
+        const response = await axios.post('/pathfinding/astar', data);
         const { path, visited_cells } = response.data;
         await animateVisitedCells(visited_cells);
         renderPath(path);
@@ -23,3 +23,4 @@ document.getElementById('BFSButton').addEventListener('click', async () => {
         console.error('Error generating maze:', error);
     }
 });
+
