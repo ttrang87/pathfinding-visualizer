@@ -1,7 +1,7 @@
 import { statusCell } from "../StatusCell.js"
 
 
-document.getElementById('DFSButton').addEventListener('click', async () => {
+document.getElementById('BFSButton').addEventListener('click', async () => {
     resetCellColors();
     const maze = statusCell()
 
@@ -14,7 +14,7 @@ document.getElementById('DFSButton').addEventListener('click', async () => {
     };
 
     try {
-        const response = await axios.post('/pathfinding/dfs', data);
+        const response = await axios.post('/pathfinding/bfs', data);
         const { path, visited_cells } = response.data;
         await animateVisitedCells(visited_cells);
 
