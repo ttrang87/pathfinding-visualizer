@@ -1,5 +1,4 @@
 from collections import deque
-from .model import Cell, Maze
 
 class Breadth_First_Search:
     def __init__(self, maze):

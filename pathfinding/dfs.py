@@ -1,5 +1,3 @@
-from .model import Cell, Maze
-
 class Depth_First_Search:
     def __init__(self, maze):
         self.maze = maze
