@@ -1,9 +1,6 @@
 class Depth_First_Search:
     def __init__(self, maze):
         self.maze = maze
-        self.visited = set()  
-        self.path = [] 
-        self.visited_cells = [] #use for animation (each step)
 
     def search(self, start, end):
         self.visited = set()

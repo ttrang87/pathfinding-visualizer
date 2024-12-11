@@ -3,8 +3,6 @@ from collections import deque
 class Breadth_First_Search:
     def __init__(self, maze):
         self.maze = maze
-        self.visited = set()
-        self.visited_cells = []  # For animation (each step)
 
     def search(self, start, end):
         self.visited = set()
