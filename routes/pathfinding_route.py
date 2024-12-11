@@ -62,11 +62,8 @@ def astarpath():
     start = tuple(start_data)
     end = tuple(end_data)
 
-    print(start, end)
-
     astar_solver = A_Star(maze)
     path, visited_cells = astar_solver.search(start, end)
-    print(path)
     if path:
         return jsonify({"path": path, "visited_cells": visited_cells})
     else:
