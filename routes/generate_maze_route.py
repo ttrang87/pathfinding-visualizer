@@ -1,40 +1,30 @@
 from flask import Blueprint, request, jsonify
-from maze_generation.kruskalmaze import MazeGenerator
+from maze_generation.kruskalmaze import KruskalMazeGenerator
+from maze_generation.verticalmaze import VerticalMazeGenerator
+from maze_generation.horizontalmaze import HorizontalMazeGenerator
+from maze_generation.randommaze import RandomMazeGenerator
 
-generate_maze_blueprint = Blueprint('generate_kruskal', __name__)
+maze_blueprint = Blueprint('maze', __name__)
 
-@generate_maze_blueprint.route('/kruskal', methods=['POST'])
-def generate_maze():
-    data = request.json
+def generate_maze_response(generator_class, data):
     rows = data.get('rows')
     cols = data.get('cols')
     start = data.get('start')
     end = data.get('end')
-    animate = data.get('animate', False)  
+    animate = data.get('animate', False)
 
     if rows < 5 or rows > 50 or cols < 5 or cols > 50:
         return jsonify({"error": "Maze dimensions must be between 5 and 50"}), 400
-    
-    maze_generator = MazeGenerator(rows, cols, start, end)
+
+    maze_generator = generator_class(rows, cols, start, end)
 
     if animate:
         maze = maze_generator.generate_maze()
-        frames = []
-        for frame in maze_generator.frames:
-            frame_array = []
-            for r in range(rows):
-                row = []
-                for c in range(cols):
-                    row.append(int(frame[r][c]))
-                frame_array.append(row)
-            frames.append(frame_array)
-        
-        maze_array = []
-        for r in range(rows):
-            row = []
-            for c in range(cols):
-                row.append(int(maze[r][c]))
-            maze_array.append(row)
+        frames = [
+            [[int(cell) for cell in row] for row in frame]
+            for frame in maze_generator.frames
+        ]
+        maze_array = [[int(cell) for cell in row] for row in maze]
 
         return jsonify({
             "maze": maze_array,
@@ -42,14 +32,28 @@ def generate_maze():
         })
 
     maze = maze_generator.generate_maze()
-
-    maze_array = []
-    for r in range(rows):
-        row = []
-        for c in range(cols):
-            row.append(int(maze[r][c]))
-        maze_array.append(row)
+    maze_array = [[int(cell) for cell in row] for row in maze]
 
     return jsonify({
         "maze": maze_array,
     })
+
+@maze_blueprint.route('/kruskal', methods=['POST'])
+def kruskal_maze():
+    data = request.json
+    return generate_maze_response(KruskalMazeGenerator, data)
+
+@maze_blueprint.route('/vertical', methods=['POST'])
+def vertical_maze():
+    data = request.json
+    return generate_maze_response(VerticalMazeGenerator, data)
+
+@maze_blueprint.route('/horizontal', methods=['POST'])
+def horizontal_maze():
+    data = request.json
+    return generate_maze_response(HorizontalMazeGenerator, data)
+
+@maze_blueprint.route('/random', methods=['POST'])
+def random_maze():
+    data = request.json
+    return generate_maze_response(RandomMazeGenerator, data)

@@ -1,6 +1,6 @@
 import { animateMaze, renderMaze } from "./RenderMaze.js";
 
-document.getElementById('KruskalMazeButton').addEventListener('click', async () => {
+document.getElementById('HorizontalMazeButton').addEventListener('click', async () => {
     const animate = document.getElementById('AnimateCheckbox').checked; // Check if animation is enabled
 
     const data = {
@@ -12,7 +12,7 @@ document.getElementById('KruskalMazeButton').addEventListener('click', async () 
     };
 
     try {
-        const response = await axios.post('/maze/kruskal', data);
+        const response = await axios.post('/maze/horizontal', data);
         const { maze, steps } = response.data;
 
         if (animate) {

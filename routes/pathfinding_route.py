@@ -1,94 +1,80 @@
 from flask import Blueprint, request, jsonify
-from pathfinding.model import Maze, Cell
+from pathfinding.share import Maze, Cell
 from pathfinding.dfs import Depth_First_Search
 from pathfinding.bfs import Breadth_First_Search
 from pathfinding.astar import A_Star
 from pathfinding.dijkstra import Dijkstra
 
-dfs_blueprint = Blueprint('dfspath', __name__)
-bfs_blueprint = Blueprint('bfspath', __name__)
-astar_blueprint = Blueprint('astarpath', __name__)
-dijkstra_blueprint = Blueprint('dijkstrapath', __name__)
+import time
 
+pathfinding_blueprint = Blueprint('pathfinding_1', __name__)
 
-@dfs_blueprint.route('/dfs', methods=['POST'])
+# Helper function for common logic
+def solve_pathfinding_1(algorithm_class, data):
+    maze_data = data.get('maze') 
+    start_data = data.get('start')  
+    end_data = data.get('end') 
+
+    if not maze_data or not start_data or not end_data:
+        return jsonify({"error": "Maze, start, and end data are required"}), 400
+
+    maze = Maze(maze_data)
+    start = Cell(start_data[0], start_data[1])
+    end = Cell(end_data[0], end_data[1])
+
+    solver = algorithm_class(maze)
+    start_time = time.perf_counter()
+    path, visited_cells = solver.search(start, end)
+    end_time = time.perf_counter()
+
+    duration = (end_time - start_time)*1000
+
+    if path:
+        return jsonify({"path": path, "visited_cells": visited_cells, "time": duration})
+    else:
+        return jsonify({"error": "No path found"}), 404
+
+def solve_pathfinding_2(algorithm_class, data, runs = 10):
+    maze_data = data.get('maze') 
+    start_data = data.get('start')  
+    end_data = data.get('end') 
+
+    if not maze_data or not start_data or not end_data:
+        return jsonify({"error": "Maze, start, and end data are required"}), 400
+
+    maze = Maze(maze_data)
+    start = tuple(start_data)
+    end = tuple(end_data)
+
+    solver = algorithm_class(maze)
+    start_time = time.perf_counter()
+    path, visited_cells = solver.search(start, end)
+    end_time = time.perf_counter()
+
+    duration = (end_time - start_time)*1000
+
+    if path:
+        return jsonify({"path": path, "visited_cells": visited_cells, "time": duration})
+    else:
+        return jsonify({"error": "No path found"}), 404
+
+# Routes
+@pathfinding_blueprint.route('/dfs', methods=['POST'])
 def dfspath():
     data = request.json
-    maze_data = data.get('maze') 
-    start_data = data.get('start')  
-    end_data = data.get('end') 
-    if not maze_data or not start_data or not end_data:
-        return jsonify({"error": "Maze, start, and end data are required"}), 400
+    return solve_pathfinding_1(Depth_First_Search, data)
 
-    maze = Maze(maze_data)
-    start = Cell(start_data[0], start_data[1])
-    end = Cell(end_data[0], end_data[1])
-
-    dfs_solver = Depth_First_Search(maze)
-    path, visited_cells = dfs_solver.search(start, end)
-    if path:
-        return jsonify({"path": path, "visited_cells": visited_cells})
-    else:
-        return jsonify({"error": "No path found"}), 404
-    
-@bfs_blueprint.route('/bfs', methods=['POST'])
+@pathfinding_blueprint.route('/bfs', methods=['POST'])
 def bfspath():
     data = request.json
-    maze_data = data.get('maze') 
-    start_data = data.get('start')  
-    end_data = data.get('end') 
-    if not maze_data or not start_data or not end_data:
-        return jsonify({"error": "Maze, start, and end data are required"}), 400
+    return solve_pathfinding_1(Breadth_First_Search, data)
 
-    maze = Maze(maze_data)
-    start = Cell(start_data[0], start_data[1])
-    end = Cell(end_data[0], end_data[1])
-
-    bfs_solver = Breadth_First_Search(maze)
-    path, visited_cells = bfs_solver.search(start, end)
-    if path:
-        return jsonify({"path": path, "visited_cells": visited_cells})
-    else:
-        return jsonify({"error": "No path found"}), 404
-
-@astar_blueprint.route('/astar', methods=['POST'])
+@pathfinding_blueprint.route('/astar', methods=['POST'])
 def astarpath():
     data = request.json
-    maze_data = data.get('maze') 
-    start_data = data.get('start')  
-    end_data = data.get('end') 
-    if not maze_data or not start_data or not end_data:
-        return jsonify({"error": "Maze, start, and end data are required"}), 400
+    return solve_pathfinding_2(A_Star, data)
 
-    maze = Maze(maze_data)
-    start = tuple(start_data)
-    end = tuple(end_data)
-
-    astar_solver = A_Star(maze)
-    path, visited_cells = astar_solver.search(start, end)
-    if path:
-        return jsonify({"path": path, "visited_cells": visited_cells})
-    else:
-        return jsonify({"error": "No path found"}), 404
-    
-@dijkstra_blueprint.route('/dijkstra', methods=['POST'])
+@pathfinding_blueprint.route('/dijkstra', methods=['POST'])
 def dijkstrapath():
     data = request.json
-    maze_data = data.get('maze') 
-    start_data = data.get('start')  
-    end_data = data.get('end') 
-    if not maze_data or not start_data or not end_data:
-        return jsonify({"error": "Maze, start, and end data are required"}), 400
-
-    maze = Maze(maze_data)
-    start = tuple(start_data)
-    end = tuple(end_data)
-
-    dijkstra_solver = Dijkstra(maze)
-    path, visited_cells = dijkstra_solver.search(start, end)
-    if path:
-        return jsonify({"path": path, "visited_cells": visited_cells})
-    else:
-        return jsonify({"error": "No path found"}), 404
-
-
+    return solve_pathfinding_2(Dijkstra, data)
