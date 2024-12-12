@@ -28,9 +28,9 @@
             <button class="dropbtn">Mazes</button>
             <div class="options">
                 <button id="KruskalMazeButton">Kruskal's Maze</button>
-                <button id="PrimMazeButton">Prim's Maze</button>
-                <button>Horizontal Maze</button>
-                <button id ="ChooseObstacleButton">Choose Obstacle</button>
+                <button id="VerticalMazeButton">Vertical Maze</button>
+                <button id="HorizontalMazeButton">Horizontal Maze</button>
+                <button id="RandomMazeButton">Random Maze</button>
             </div>
         </div>
         <div class="dropdown">
@@ -45,14 +45,22 @@
         </div>
     </header>
     <main>
+        <div class="info-panel"><b>Welcome to Path Finding Visualizer</b></div>
         <div class="grid-container" id="grid"></div>
     </main>
+    <div id="toast-container"></div>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+
     <script src="../static/scripts/InitialGrid.js"></script>
-    <script src="../static/scripts/terrain/KruskalMaze.js"></script>
+    <script type="module" src="../static/scripts/terrain/KruskalMaze.js"></script>
+    <script type="module" src="../static/scripts/terrain/VerticalMaze.js"></script>
+    <script type="module" src="../static/scripts/terrain/HorizontalMaze.js"></script>
+    <script type="module" src="../static/scripts/terrain/RandomMaze.js"></script>
+
     <script src="../static/scripts/Clear.js"></script>
-    <script src="../static/scripts/terrain/ChooseObstacle.js"></script>
+
     <script type="module" src="../static/scripts/path_find/DFS.js"></script>
     <script type="module" src="../static/scripts/path_find/BFS.js"></script>
     <script type="module" src="../static/scripts/path_find/Astar.js"></script>

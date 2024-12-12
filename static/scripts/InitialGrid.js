@@ -1,11 +1,11 @@
 const gridContainer = document.getElementById("grid");
-const cellSize = 40;
+const cellSize = 30;
 
-const defaultcols = 31;
-const defaultrows = 13;
+const defaultcols = 41;
+const defaultrows = 16;
 
-let startCell = { row: 3, col: 4 }; 
-let endCell = { row: 10, col: 27 }; 
+let startCell = { row: 6, col: 8 }; 
+let endCell = { row: 6, col: 30 }; 
 
 let isDraggingStart = false;
 let isDraggingEnd = false;
@@ -15,7 +15,7 @@ function createGrid() {
     gridContainer.innerHTML = "";
 
     const containerWidth = window.innerWidth;
-    const containerHeight = window.innerHeight - 80;
+    const containerHeight = window.innerHeight - 160;
 
     const cols = Math.floor(containerWidth / cellSize);
     const rows = Math.floor(containerHeight / cellSize);
@@ -29,11 +29,7 @@ function createGrid() {
             cell.classList.add("grid-cell");
             cell.dataset.row = row;
             cell.dataset.col = col;
-            cell.addEventListener("click", () => {
-                const x = cell.dataset.row;
-                const y = cell.dataset.col;
-                console.log(`Cell clicked: (${x}, ${y})`);
-            });
+            cell.addEventListener('click', () => { cell.classList.toggle('maze-cell')});
 
             if (row === startCell.row && col === startCell.col) {
                 cell.classList.add("start-cell");

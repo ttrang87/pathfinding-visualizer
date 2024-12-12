@@ -1,6 +1,12 @@
 document.getElementById('clearBoardButton').addEventListener('click', async () => {
-    startCell = { row: 3, col: 4 };
-    endCell = { row: 10, col: 27 };
+    startCell = { row: 6, col: 8 };
+    endCell = { row: 6, col: 30 };
+    const infoPanel = document.querySelector('.info-panel');
+    
+    // Remove all child elements except the first (the welcome message)
+    while (infoPanel.children.length > 1) {
+        infoPanel.removeChild(infoPanel.lastChild);
+    }
     createGrid();
 
 });

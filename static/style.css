@@ -8,14 +8,15 @@ header {
     justify-content: space-around;
     align-items: center;
     background-color: #B9D9EB;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 10px 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    padding: 0px 10px;
 }
 
 #logo {
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 0;
     margin-left: 4px;
+    font-weight: bold;
 }
 
 .firstpart {
@@ -72,25 +73,48 @@ header {
     display: block; /* Show the options when hovering over the dropdown */
 }
 
+main {
+    display: flex;
+    flex-direction: column; /* Change from flex to flex-column */
+    align-items: center; /* Center children horizontally */
+}
+
+.info-panel {
+    width: 100%; /* Full width */
+    background-color: #f0f0f0; /* Optional: give it a background color */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd; /* Optional: add a subtle border */
+    margin-top: 3px ;
+    height: 20px;
+    overflow-y: auto;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #002D62;
+}
+
 .grid-container {
     display: grid;
     margin: 0 auto;                         /* Center the grid horizontally */
     position: relative;                     /* Allows additional alignment if needed */
     width: 100vw;
-    height: calc(100vh - 100px); /* Subtract header height */
+    height: calc(100vh - 160px); /* Subtract header height */
     gap: 1px;
-    margin-left: 5px;
-    margin-top: 3px;
+    margin-left: 4px;
+    margin-top: 4px;
 }
 
 .grid-cell {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background-color: #e2f1f7; 
 }
 
 .maze-cell {
     background-color: #5072A7;
+}
+
+.path {
+    background-color: yellow !important;;
 }
 
 .start-cell {
@@ -101,10 +125,36 @@ header {
     background-color: #FF0800; 
 }
 
-.path {
-    background-color: yellow !important;;
+#toast-container {
+    position: fixed;
+    top: 20px; 
+    right: 20px; 
+    z-index: 9999; /* Ensures that the toast appears above other elements */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align the toasts to the right */
 }
 
 
+.toast {
+    background-color: white;
+    color: #002D62;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    max-width: 320px; /* limit toast width */
+}
+
+/* Fade-in effect for toast */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 
