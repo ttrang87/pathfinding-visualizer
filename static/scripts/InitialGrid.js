@@ -2,7 +2,7 @@ const gridContainer = document.getElementById("grid");
 const cellSize = 30;
 
 const defaultcols = 41;
-const defaultrows = 16;
+const defaultrows = 15;
 
 let startCell = { row: 6, col: 8 }; 
 let endCell = { row: 6, col: 30 }; 

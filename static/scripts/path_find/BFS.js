@@ -1,8 +1,13 @@
 import { statusCell } from "../StatusCell.js"
-import {renderPath, resetCellColors, animateVisitedCells} from "./CellsColor.js"
+import {renderPath, resetCellColors, animateVisitedCells, isRunning, setRunningState} from "./SharedFunction.js"
 import { updateInfor, scrollToBottom, showToast } from "./InformationPanel.js";
 
 document.getElementById('BFSButton').addEventListener('click', async () => {
+    if (isRunning) {
+            showToast('An algorithm is already running. Please wait!');
+            return; // Prevent starting a new algorithm
+        }
+    
     resetCellColors();
     showToast('Breath-first Search is unweighted and guarantees the shortest path!');
     const maze = statusCell()
@@ -16,6 +21,7 @@ document.getElementById('BFSButton').addEventListener('click', async () => {
     };
 
     try {
+        setRunningState(true);
         const response = await axios.post('/pathfinding/bfs', data);
         const { path, visited_cells, time } = response.data;
         updateInfor("BFS", visited_cells, time, path);
@@ -24,5 +30,7 @@ document.getElementById('BFSButton').addEventListener('click', async () => {
         renderPath(path);
     } catch (error) {
         console.error('Error generating maze:', error);
+    } finally {
+        setRunningState(false); // Reset the flag after completion
     }
 });

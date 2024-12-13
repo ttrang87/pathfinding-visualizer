@@ -50,7 +50,7 @@ header {
     display: none; /*Initially hides the dropdown menu until the user interacts with it.*/
     position: absolute; /*Positions the .options element relative to the .dropdown element.*/
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 150px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -58,7 +58,7 @@ header {
 .options button {
     background-color: #fff;
     color: black;
-    padding: 12px 16px;
+    padding: 12px 14px;
     border: none;
     text-align: left;
     width: 100%;
@@ -73,6 +73,7 @@ header {
     display: block; /* Show the options when hovering over the dropdown */
 }
 
+
 main {
     display: flex;
     flex-direction: column; /* Change from flex to flex-column */
@@ -82,11 +83,11 @@ main {
 .info-panel {
     width: 100%; /* Full width */
     background-color: #f0f0f0; /* Optional: give it a background color */
-    padding: 20px;
+    padding: 25px;
     text-align: center;
     border-bottom: 1px solid #ddd; /* Optional: add a subtle border */
     margin-top: 3px ;
-    height: 20px;
+    height: 25px;
     overflow-y: auto;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #002D62;
@@ -114,15 +115,15 @@ main {
 }
 
 .path {
-    background-color: yellow !important;;
+    background-color: yellow !important;
 }
 
 .start-cell {
-    background-color: #16F529;
+    background-color: #16F529 !important;
 }
 
 .end-cell {
-    background-color: #FF0800; 
+    background-color: #FF0800 !important; 
 }
 
 #toast-container {

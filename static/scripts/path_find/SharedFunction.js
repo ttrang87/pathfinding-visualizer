@@ -1,3 +1,9 @@
+export let isRunning = false;
+
+export function setRunningState(state) {
+    isRunning = state;
+}
+
 export function resetCellColors() {
     // Remove visited class and reset background color for visited cells
     document.querySelectorAll('.visited').forEach(cell => {
@@ -42,7 +48,7 @@ export function animateVisitedCells(visited_cells) {
                     cell.style.backgroundColor = getGradientColor(index, visited_cells.length);
                 }, delay);
             }
-            delay += 30; // Increase delay for each step to animate
+            delay += window.mazeSpeed; // Increase delay for each step to animate
         });
 
         // Resolve the promise after all visited cells are animated
