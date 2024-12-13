@@ -124,7 +124,7 @@ export function animateMaze(steps, rows, cols) {
 
         currentStep++;
         if (currentStep < steps.length) {
-            setTimeout(drawStep, 40); 
+            setTimeout(drawStep, window.mazeSpeed); 
         }
     }
 
